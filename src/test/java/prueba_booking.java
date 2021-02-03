@@ -10,7 +10,7 @@ public class prueba_booking {
 
     @Test
     public void ingresarBooking(){
-        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.booking.com");
         //System.out.println(driver.getTitle());
