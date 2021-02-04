@@ -41,7 +41,7 @@ public class prueba_booking extends BasePage {
         for (WebElement link : linkList) {
             System.out.println(">---"+link.getAttribute("href"));
         }
-
+/*
         String url = "";
         List<String> brokenLinks= new ArrayList<String>();
         List<String> okLinks= new ArrayList<String>();
@@ -84,6 +84,8 @@ public class prueba_booking extends BasePage {
             }
 
         }
+
+ */
         }
     @Test
     public void mostarH1sTest(){
