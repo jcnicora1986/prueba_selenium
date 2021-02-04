@@ -135,8 +135,9 @@ public class prueba_booking extends BasePage {
         //Make sure the email address you entered is correct.
 
         //No aparece:
-        //la opcion para registrar
+        //la opcion para registrar tengo que ir a la home
         //el error de que no esta asociada la cuenta.
+
         //10.b el boton para registrarse
 
         //10.c
