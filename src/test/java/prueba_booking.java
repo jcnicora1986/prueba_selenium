@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.testng.annotations.Test;
+import org.testng.annotations.TestInstance;
 
 public class prueba_booking extends BasePage {
 
@@ -154,7 +155,26 @@ public class prueba_booking extends BasePage {
         Assert.assertEquals(errorMsgPassDiferentes.getText(),"The passwords you entered didn't match – try again");
     }
 
+    @Test
+    public void crearCuentaTest(){
+        BookingHomePage bookingHomePage = new BookingHomePage(driver);
+        BookingRegisterPage bookingRegisterPage = new BookingRegisterPage(driver);
+        bookingHomePage.clickBtnRegister();
+        bookingRegisterPage.fillingEmailExist();
+        String email = bookingRegisterPage.getTextEmail();
 
+        bookingRegisterPage.clickOnContinueEmail();
+
+        WebElement msgAccountExist = bookingRegisterPage.getMsgEnterPassAccountExist();
+        String textMsgAccountExist = msgAccountExist.getText();
+
+        System.out.println(textMsgAccountExist + "" + email );
+
+        //Enter your Booking.com password for .
+        Assert.assertEquals(textMsgAccountExist,"Enter your Booking.com password for .");
+
+
+    }
 
 }
 

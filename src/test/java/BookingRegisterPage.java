@@ -32,6 +32,19 @@ public class BookingRegisterPage extends BasePage {
 
     }
 
+    public String getTextEmail(){
+
+        String email = driver.findElement(By.id("username")).getAttribute("value");
+
+        return email;
+    }
+
+    public void fillingEmailExist(){
+
+      driver.findElement(By.id("username")).sendKeys("test@test.com");
+
+    }
+
     public void clickOnContinueEmail(){
         driver.findElement(By.xpath("//span[@class='bui-button__text'][contains(text(), 'Continue with email')]")).click();
     }
@@ -64,4 +77,13 @@ public class BookingRegisterPage extends BasePage {
     public void clickCreateAccount(){
         driver.findElement(By.xpath("//span[@class='bui-button__text'][contains(text(), 'Create account')]")).click();
     }
+
+    public WebElement getMsgEnterPassAccountExist(){
+
+        List<WebElement> msgEnterPassAccountExist = driver.findElements(By.xpath("//p[@class='nw-step-description'][contains(text(), 'Enter your Booking.com password for ')]"));
+        WebElement msgAccountExist = msgEnterPassAccountExist.get(0);
+        return msgAccountExist;
+    }
+
+
 }
