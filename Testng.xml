@@ -1,0 +1,8 @@
+<suite name="Clase 12">
+    <test name="Ejercicios Testng">
+        <classes>
+            <class name="prueba_booking"></class>
+        </classes>
+    </test>
+</suite>
+
