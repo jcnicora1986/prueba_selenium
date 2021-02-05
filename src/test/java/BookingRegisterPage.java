@@ -32,6 +32,20 @@ public class BookingRegisterPage extends BasePage {
 
     }
 
+    public void webElementemail(String email){
+
+        driver.findElement(By.id("username")).sendKeys(email);
+
+
+    }
+
+    public String getTextEmail(){
+
+        String email = driver.findElement(By.id("username")).getAttribute("value");
+
+        return email;
+    }
+
     public void fillingEmailExist(){
 
       driver.findElement(By.id("username")).sendKeys("test@test.com");
@@ -40,6 +54,13 @@ public class BookingRegisterPage extends BasePage {
 
     public void clickOnContinueEmail(){
         driver.findElement(By.xpath("//span[@class='bui-button__text'][contains(text(), 'Continue with email')]")).click();
+    }
+
+    public String getTextIngresoEmailVacio(){
+
+        String textError=driver.findElement(By.id("username-description")).getText();
+        return textError;
+
     }
 
 

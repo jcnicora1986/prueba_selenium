@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 
 import java.net.HttpURLConnection;
@@ -21,7 +22,7 @@ public class prueba_booking extends BasePage {
 
     }
 
-    @Test
+    @Test (priority = 0)
     public void validarTitulo() {
 
         BookingHomePage bookingHomePage = new BookingHomePage(driver);
@@ -111,7 +112,7 @@ public class prueba_booking extends BasePage {
 
         for (WebElement h2 : listH2) {
             System.out.println(h2.getText());
-            if (h2.getText().equals("Connect with other travellers")) {
+            if (h2.getText().equals("Connect with other travelers")) {
                 h2Found = true;
             }
 
@@ -161,19 +162,61 @@ public class prueba_booking extends BasePage {
         BookingRegisterPage bookingRegisterPage = new BookingRegisterPage(driver);
         bookingHomePage.clickBtnRegister();
         bookingRegisterPage.fillingEmailExist();
+        String email = bookingRegisterPage.getTextEmail();
+
         bookingRegisterPage.clickOnContinueEmail();
 
         WebElement msgAccountExist = bookingRegisterPage.getMsgEnterPassAccountExist();
         String textMsgAccountExist = msgAccountExist.getText();
 
-        System.out.println(textMsgAccountExist +);
+        System.out.println(textMsgAccountExist + "" + email );
 
-        Assert.assertEquals();
+        //Enter your Booking.com password for .
+        Assert.assertEquals(textMsgAccountExist,"Enter your Booking.com password for .");
 
 
     }
 
-}
+    @Test(dataProvider = "emails", dataProviderClass = DataProviderBooking.class)
+    public void bookingEmailsInvalid(String anEmail, String status){
+        BookingHomePage bookingHomePage = new BookingHomePage(driver);
+        BookingRegisterPage bookingRegisterPage = new BookingRegisterPage(driver);
+        bookingHomePage.clickBtnRegister();
+        if (status.equals("false")){
+
+            bookingRegisterPage.webElementemail(anEmail);
+            // localizo el mensaje de existo y agrego un assert!! :)
+            System.out.println("El email no valido a utilizar es: "+ anEmail);
+        }
+
+        bookingRegisterPage.clickOnContinueEmail();
+
+        if (anEmail == ""){
+            String msgEmailVacio =bookingRegisterPage.getTextIngresoEmailVacio();
+            System.out.println("El email ingresado fue vacio: " + msgEmailVacio );
+            Assert.assertEquals(msgEmailVacio, "Enter your email address");
+
+        }else {
+            WebElement errorMsgEmail = bookingRegisterPage.getErrorMsgEmailInvalid();
+            System.out.println("El msj de error es: "+errorMsgEmail.getText());
+            Assert.assertEquals(errorMsgEmail.getText(),"Make sure the email address you entered is correct.");
+            //Make sure the email address you entered is correct.
+        }
+
+
+    }
+
+        @AfterTest
+        public void tearDown(){
+            System.out.println("Se ha terminado de ejecutar un test...");
+            driver.close();
+        }
+
+
+
+    }
+
+
 
 
 
